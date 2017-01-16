@@ -132,8 +132,8 @@ if ( ! function_exists('hkdf'))
 			if ( ! defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400)
 			{
 				unset(
-					$sizes['tiger128,3'], $sizes['tiger160,3'], $sizes['tiger190,3'],
-					$sizes['tiger128,4'], $sizes['tiger160,4'], $sizes['tiger190,4']
+					$sizes['tiger128,3'], $sizes['tiger160,3'], $sizes['tiger192,3'],
+					$sizes['tiger128,4'], $sizes['tiger160,4'], $sizes['tiger192,4']
 				);
 			}
 		}
