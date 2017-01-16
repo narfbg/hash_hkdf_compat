@@ -145,12 +145,13 @@ if ( ! function_exists('hkdf'))
 			// Still, we want to preserve the original input for the error message.
 			if ( ! isset($sizes[strtolower($algo)]))
 			{
-				trigger_error(
-					in_array(strtolower($algo), hash_algos(), true)
-						? "hash_hkdf(): Non-cryptographic hashing algorithm: {$algo}"
-						: "hash_hkdf(): Unknown hashing algorithm: {$algo}",
-					E_USER_WARNING
-				);
+				if (in_array(strtolower($algo), hash_algos(), true) && strncasecmp($algo, 'tiger1', 6) !== 0)
+				{
+					trigger_error("hash_hkdf(): Non-cryptographic hashing algorithm: {$algo}", E_USER_WARNING);
+					return false;
+				}
+
+				trigger_error("hash_hkdf(): Unknown hashing algorithm: {$algo}", E_USER_WARNING);
 				return false;
 			}
 
