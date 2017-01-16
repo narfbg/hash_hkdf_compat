@@ -1,0 +1,24 @@
+{
+	"name": "narf/hash_hkdf_compat",
+	"description": "hash_hkdf() compat package",
+	"keywords": [ "hkdf", "hash_hkdf", "crypto", "cryptography" ],
+	"type": "library",
+	"license": "ISC",
+	"require": {
+		"php": ">=5.1.2",
+		"ext-hash": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.* || 5.*"
+	},
+	"autoload": {
+		"files": ["src/hash_hkdf.php"]
+	},
+	"authors": [
+		{ "name": "Andrey Andreev", "email": "narf@devilix.net" }
+	],
+	"support": {
+		"source": "https://github.com/narfbg/hash_hkdf_compat",
+		"support": "https://github.com/narfbg/hash_hkdf_compat/issues"
+	}
+}
