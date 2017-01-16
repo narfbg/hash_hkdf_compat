@@ -10,7 +10,20 @@ class hash_hkdf_Test extends PHPUnit_Framework_TestCase {
 	 */
 	private function algoIsAvailable($algo)
 	{
-		isset(self::$availableAlgos) || self::$availableAlgos = array_flip(hash_algos());
+		if ( ! isset(self::$availableAlgos))
+		{
+			self::$availableAlgos = array();
+			// array_flip(hash_algos()) was more convenient, but
+			// we had to blacklist tiger on PHP pre-5.4.0
+			foreach (hash_algos() as $algo)
+			{
+				if (strncasecmp('tiger1', $algo, 6) !== 0)
+				{
+					self::$availableAlgos[$algo] = $algo;
+				}
+			}
+		}
+
 		return isset(self::$availableAlgos[$algo]);
 	}
 
@@ -220,6 +233,17 @@ class hash_hkdf_Test extends PHPUnit_Framework_TestCase {
 				array('returnValue' => false, 'errorMessage' => 'hash_hkdf(): Length must be less than or equal to 5100: 5101'),
 			)
 		);
+
+		if (version_compare(PHP_VERSION, '5.4', '<'))
+		{
+			foreach (array('tiger128,3', 'tiger160,3', 'tiger192,3', 'tiger128,4', 'tiger160,4', 'tiger192,4') as $algo)
+			{
+				$data["Unknown: {$algo}"] = array(
+					array($algo, $ikm),
+					array('returnValue' => false, 'errorMessage' => "hash_hkdf(): Unknown hashing algorithm: {$algo}")
+				);
+			}
+		}
 
 		foreach (array('adler32', 'crc32', 'crc32b', 'fnv132', 'fnv1a32', 'fnv164', 'fnv1a64', 'joaat') as $algo)
 		{

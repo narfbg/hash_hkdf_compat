@@ -127,6 +127,15 @@ if ( ! function_exists('hkdf'))
 				),
 				array_flip(hash_algos())
 			);
+
+			// PHP pre-5.4.0's output for Tiger hashes is in little-endian byte order - blacklist
+			if ( ! defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50400)
+			{
+				unset(
+					$sizes['tiger128,3'], $sizes['tiger160,3'], $sizes['tiger190,3'],
+					$sizes['tiger128,4'], $sizes['tiger160,4'], $sizes['tiger190,4']
+				);
+			}
 		}
 
 		if ( ! isset($sizes[$algo]))
