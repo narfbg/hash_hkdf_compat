@@ -29,7 +29,7 @@
  * @license	http://opensource.org/licenses/ISC ISC License (ISC)
  * @link	https://github.com/narfbg/hash_hkdf_compat
  */
-if ( ! function_exists('hkdf'))
+if ( ! function_exists('hash_hkdf'))
 {
 	/**
 	 * hash_hkdf()
