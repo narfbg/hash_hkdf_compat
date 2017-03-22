@@ -2,7 +2,7 @@
 /**
  * ISC License (ISC)
  *
- * Copyright (c) 2014, Andrey Andreev <narf@devilix.net>
+ * Copyright (c) 2017, Andrey Andreev <narf@devilix.net>
  * All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
